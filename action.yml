@@ -1,0 +1,26 @@
+name: 'Kube config for Huawei Cloud CCE cluster'
+description: 'Install kubectl and Set Kube config for Huawei Cloud CCE cluster'
+branding:
+  color: 'red'
+  icon: 'chevron-up'
+author: 'wenchui'
+inputs:
+  ak: 
+    required: true
+    description: 'Huawei Cloud account Access key id'
+  sk: 
+    required: true
+    description: 'Huawei Cloud account Secret key id'
+  region: 
+    required: true
+    description: 'the region where Huawei Cloud CCE cluster deploy'
+  project_id: 
+    required: true
+    description: 'the project id of Huawei Cloud account'
+  cluster_id: 
+    required: true
+    description: 'the ID of Huawei Cloud CCE cluster '
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
