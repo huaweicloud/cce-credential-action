@@ -29,7 +29,7 @@ cluster_id:CCE集群的集群ID，必填
 
 - name: get CCE Cluster info
       - run: |
-          kubectl version --client --short
+          kubectl version --client 
           kubectl config view
           kubectl cluster-info
           kubectl get pod,svc --all-namespaces

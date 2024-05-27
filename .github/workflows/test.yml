@@ -2,7 +2,7 @@ on: # rebuild any PRs and main branch changes
   pull_request:
   push:
     branches:
-      - main
+      - master
       - 'releases/*'
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
           npm install
       - run: |
           npm run all
-  test: # make sure the action works on a clean machine without building
+  test: # make sure the action works on a clean machine without buildings
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
           project_id: "0dd8cb41**********cdc019b5a84546"   # replace your project_id
           cluster_id: "f288d212-****-****-****-0255ac101534"    # replace your cluster_id
       - run: |
-          kubectl version --client --short
+          kubectl version --client 
           kubectl config view
           kubectl cluster-info
           kubectl get pod,svc --all-namespaces
