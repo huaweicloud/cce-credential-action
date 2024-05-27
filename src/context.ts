@@ -32,7 +32,7 @@ export const KUBECTL_LATEST_STABLE_URL =
 export const KUBECTL_DOWNLOAD_URL =
     'https://storage.googleapis.com/kubernetes-release/release/%s/bin/%s/%s/%s'
 
-export const KUBECTL_STABLE_VERSION = 'v1.24.0'
+export const KUBECTL_STABLE_VERSION = 'v1.28.0'
 
 export const LINUX_KUBECTL_INSTALL_PATH = '/usr/local/bin'
 
