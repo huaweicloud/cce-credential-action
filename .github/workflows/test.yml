@@ -25,11 +25,11 @@ jobs:
         with:
           ak: ${{ secrets.ACCESSKEY }}
           sk: ${{ secrets.SECRETACCESSKEY }}
-          region: "cn-north-4"
-          project_id: "0dd8cb41**********cdc019b5a84546"   # replace your project_id
-          cluster_id: "f288d212-****-****-****-0255ac101534"    # replace your cluster_id
+          region: "af-south-1"
+          project_id: "eecc7ec81ad346adbcde0a07fa343cb0"   # replace your project_id
+          cluster_id: "8817579e-f98a-11ee-990c-0255ac1000eb"    # replace your cluster_id
       - run: |
-          kubectl version --client --short
+          kubectl version --client
           kubectl config view
           kubectl cluster-info
           kubectl get pod,svc --all-namespaces
