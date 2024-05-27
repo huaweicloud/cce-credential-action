@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          npm config set registry https://registry.npmjs.org/
+      - run: |
           npm install
       - run: |
           npm run all
