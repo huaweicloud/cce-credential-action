@@ -16,7 +16,10 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: npm install
+      - run: |
+          npm install
+      - run: |
+          npm i --package-lock-only
 
       - name: Commit package-lock.json if not existing
         env:
