@@ -15,10 +15,25 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: |
-          npm config set registry https://registry.npmjs.org/
-      - run: |
-          npm install
+      - name: Install dependencies
+        run: npm install
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
+
+      - name: Commit package-lock.json if not existing
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json already exists."
+          else
+            echo "package-lock.json does not exist. Generating..."
+            git config --global user.name 'github-actions[bot]'
+            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+            git add package-lock.json
+            git commit -m "Add missing package-lock.json"
+            git push
+          fi
       - run: |
           npm run all
   test: # make sure the action works on a clean machine without building
