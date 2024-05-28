@@ -22,7 +22,7 @@ jobs:
 
       - name: Commit package-lock.json if not existing
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GT }}
         run: |
           if [ -f package-lock.json ]; then
             echo "package-lock.json already exists."
