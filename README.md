@@ -3,12 +3,12 @@ Cloud Container Engine (CCE) provides highly scalable and high-performance enter
 This action checks whether kubectl is installed in the current environment. If kubectl is not installed, the latest stable kubectl is installed and obtains the credentials of the CCE cluster created on CCE based on the AK/SK, project ID, and cluster information. Configured in the current environment to provide authentication for subsequent operations such as cluster deployment, update, and deletion.
 
 ## **Pre-work**
-(1). Create a CCE cluster. For details, see https://support.huaweicloud.com/cce/index.html.
-(2). Obtain the AK/SK and project ID of the HUAWEI CLOUD user. For details, see https://support.huaweicloud.com/apm_faq/apm_03_0001.html.
-(3) Obtain the cluster ID of the CCE cluster. To obtain the ID, click the CCE cluster to go to the CCE details page and copy the cluster ID in the upper left corner.
-(4) To access the HUAWEI CLOUD CCE cluster from GitHub, you need to create and bind an EIP to the cluster.
+1. Create a CCE cluster. For details, see https://support.huaweicloud.com/cce/index.html.
+2. Obtain the AK/SK and project ID of the HUAWEI CLOUD user. For details, see https://support.huaweicloud.com/apm_faq/apm_03_0001.html.
+3. Obtain the cluster ID of the CCE cluster. To obtain the ID, click the CCE cluster to go to the CCE details page and copy the cluster ID in the upper left corner.
+4. To access the HUAWEI CLOUD CCE cluster from GitHub, you need to create and bind an EIP to the cluster.
 
-## **Parameter description: * *
+## **Parameter description:**
 ak: Huawei access key (AK), which is mandatory.
 sk: access key (SK), which is mandatory.
 region: specifies the region where the current CCE cluster is located, for example, cn-north-4. This parameter is mandatory.
@@ -40,19 +40,20 @@ kubectl get pod,svc --all-namespaces
 - This action needs to download kubectl and access the website in the domain name https://storage.googleapis.com.
 
 ## Public IP address introduced by the third-party open-source package
-- https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
-- https://iam.myhuaweicloud.com
-- https://github.com/jprichardson/node-fs-extra/issues/269
-- https://github.com/jprichardson/node-fs-extra/pull/141
-- https://lodash.com/
-- https://openjsf.org/
-- https://lodash.com/license
-- http://underscorejs.org/LICENSE
-- https://npms.io/search?q=ponyfill
-- http://momentjs.com/guides/#/warnings/js-date/
-- http://momentjs.com/guides/#/warnings/min-max/
-- http://momentjs.com/guides/#/warnings/add-inverted-param/
-- http://momentjs.com/guides/#/warnings/zone/
-- http://momentjs.com/guides/#/warnings/dst-shifted/
-- https://repo.cloudartifact.lfg.dragon.tools.huawei.com/artifactory/api/npm/cbu-npm-public/axios/-/axios-0.21.4.tgz
-- https://github.com/axios/axios/issues
+- [https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary](https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary)
+- [https://iam.myhuaweicloud.com](https://iam.myhuaweicloud.com)
+- [https://github.com/jprichardson/node-fs-extra/issues/269](https://github.com/jprichardson/node-fs-extra/issues/269)
+- [https://github.com/jprichardson/node-fs-extra/pull/141](https://github.com/jprichardson/node-fs-extra/pull/141)
+- [https://lodash.com/](https://lodash.com/)
+- [https://openjsf.org/](https://openjsf.org/)
+- [https://lodash.com/license](https://lodash.com/license)
+- [http://underscorejs.org/LICENSE](http://underscorejs.org/LICENSE)
+- [https://npms.io/search?q=ponyfill](https://npms.io/search?q=ponyfill)
+- [http://momentjs.com/guides/#/warnings/js-date/](http://momentjs.com/guides/#/warnings/js-date/)
+- [http://momentjs.com/guides/#/warnings/min-max/](http://momentjs.com/guides/#/warnings/min-max/)
+- [http://momentjs.com/guides/#/warnings/add-inverted-param/](http://momentjs.com/guides/#/warnings/add-inverted-param/)
+- [http://momentjs.com/guides/#/warnings/zone/](http://momentjs.com/guides/#/warnings/zone/)
+- [http://momentjs.com/guides/#/warnings/dst-shifted/](http://momentjs.com/guides/#/warnings/dst-shifted/)
+- [https://repo.cloudartifact.lfg.dragon.tools.huawei.com/artifactory/api/npm/cbu-npm-public/axios/-/axios-0.21.4.tgz](https://repo.cloudartifact.lfg.dragon.tools.huawei.com/artifactory/api/npm/cbu-npm-public/axios/-/axios-0.21.4.tgz)
+- [https://github.com/axios/axios/issues](https://github.com/axios/axios/issues)
+
