@@ -54,7 +54,7 @@ export async function installKubeConfig(kubeconfigPath: string) {
     await utils.execCommand(installCommand)
     console.log('kubectl config is already set')
     const viewClustInfo =
-        'kubectl config view && kubectl cluster-info && kubectl get pod,svc --all-namespaces'
+        'kubectl cluster-info'
     await utils.execCommand(viewClustInfo)
 }
 /**
