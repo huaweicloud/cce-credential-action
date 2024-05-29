@@ -34,7 +34,6 @@
     "semver": "^7.3.5"
   },
   "devDependencies": {
-    "@cloud/eslint-config-cbc": "^1.7.2",
     "@types/node": "^16.11.25",
     "@types/semver": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",

@@ -4,14 +4,36 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+  workflow_dispatch:
 
 jobs:
   build: # make sure build/ci work properly
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          npm install
+      - name: Set up Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Generate Package-lock-Json
+        run: npm i --package-lock-only
+
+      - name: Commit package-lock.json if not existing
+        env:
+          GITHUB_TOKEN: ${{ secrets.GT }}
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json already exists."
+          else
+            echo "package-lock.json does not exist. Generating..."
+            git config --global user.name 'github-actions[bot]'
+            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+            git add package-lock.json
+            git commit -m "Add missing package-lock.json"
+            git push
+          fi
       - run: |
           npm run all
   test: # make sure the action works on a clean machine without building
@@ -25,11 +47,11 @@ jobs:
         with:
           ak: ${{ secrets.ACCESSKEY }}
           sk: ${{ secrets.SECRETACCESSKEY }}
-          region: "cn-north-4"
-          project_id: "0dd8cb41**********cdc019b5a84546"   # replace your project_id
-          cluster_id: "f288d212-****-****-****-0255ac101534"    # replace your cluster_id
+          region: "af-south-1"
+          project_id: "eecc7ec81ad346adbcde0a07fa343cb0"   # replace your project_id
+          cluster_id: "8817579e-f98a-11ee-990c-0255ac1000eb"    # replace your cluster_id
       - run: |
-          kubectl version --client --short
+          kubectl version --client
           kubectl config view
           kubectl cluster-info
           kubectl get pod,svc --all-namespaces
