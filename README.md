@@ -1,59 +1,58 @@
 # cce-credential-action
-Cloud Container Engine (CCE) provides highly scalable and high-performance enterprise-class Kubernetes clusters that can run Docker containers. With CCE, you can easily deploy, manage, and scale containerized applications on HUAWEI CLOUD.
-This action checks whether kubectl is installed in the current environment. If kubectl is not installed, the latest stable kubectl is installed and obtains the credentials of the CCE cluster created on CCE based on the AK/SK, project ID, and cluster information. Configured in the current environment to provide authentication for subsequent operations such as cluster deployment, update, and deletion.
+云容器引擎（Cloud Container Engine，简称CCE）提供高度可扩展的、高性能的企业级Kubernetes集群，支持运行Docker容器。借助云容器引擎，您可以在华为云上轻松部署、管理和扩展容器化应用程序。  
+本Action会检测当前环境是否安装了kubectl,如果没有安装，则会安装最新stable的kubectl，然后通过AK/SK和projectid,cluster等信息获取到用户在CCE上创建的CCE集群的Credentials，配置到当前环境中，为后续的集群部署，更新，删除等操作提供鉴权
 
-## **Pre-work**
-1. Create a CCE cluster. For details, see https://support.huaweicloud.com/cce/index.html.
-2. Obtain the AK/SK and project ID of the HUAWEI CLOUD user. For details, see https://support.huaweicloud.com/apm_faq/apm_03_0001.html.
-3. Obtain the cluster ID of the CCE cluster. To obtain the ID, click the CCE cluster to go to the CCE details page and copy the cluster ID in the upper left corner.
-4. To access the HUAWEI CLOUD CCE cluster from GitHub, you need to create and bind an EIP to the cluster.
+## **前置工作**
+(1).创建CCE集群,详情请参考CCE文档:https://support.huaweicloud.com/cce/index.html  
+(2).获取华为云用户的AK/SK和project_id,详情请参考 https://support.huaweicloud.com/apm_faq/apm_03_0001.html  
+(3).获取CCE集群的集群ID,获取方法:点击CCE集群进入CCE详情页面,然后拷贝左上角的 集群ID  
+(4).由于要从外网github上访问华为云CCE集群，需要为集群创建并绑定弹性公网IP
 
-## **Parameter description:**
-ak: Huawei access key (AK), which is mandatory.
-sk: access key (SK), which is mandatory.
-region: specifies the region where the current CCE cluster is located, for example, cn-north-4. This parameter is mandatory.
-project_id: project ID of the region to which the current user belongs, which is mandatory.
-cluster_id: specifies the ID of the CCE cluster. This parameter is mandatory.
+## **参数说明:**
+ak:华为访问密钥即AK，必填  
+sk:访问密钥即SK，必填  
+region:当前CCE集群所在的region，如cn-north-4,必填  
+project_id:当前用户所在region的project_id，必填  
+cluster_id:CCE集群的集群ID，必填  
 
-## **Example**
-Example: Run the cce-credential-action@v1.0.0 command to obtain the kubeconfig of the CCE cluster and use the kubeconfig to perform operations on the CCE cluster.
+## **使用样例**
+样例说明:通过cce-credential-action@v1.0.0获取到cce集群的kubeconfig,然后通过这个kubeconfig来操作CCE集群
 ```yaml
 - name: get CCE Cluster Credentials
-uses: huaweicloud/cce-credential-action@v1.0.0
-with:
-ak: ${{secrets.ACCESSKEY}}
-sk: ${{secrets.SECRETACCESSKEY}}
-region: "af-south-1"
-project_id: "xxxxxxxxxxxxxxxxxxxxxxx"
-cluster_id: "xxxxxxxxxxxxxxxxxxxxxxx"
+  uses: huaweicloud/cce-credential-action@v1.0.0
+  with:
+     ak: ${{ secrets.ACCESSKEY }}
+     sk: ${{ secrets.SECRETACCESSKEY }}
+     region: "cn-north-4"
+     project_id: "xxxxxxxxxxxxxxxxxxxxxxx"
+     cluster_id: "xxxxxxxxxxxxxxxxxxxxxxx"
 
 - name: get CCE Cluster info
-- run: |
-kubectl version --client
-kubectl config view
-kubectl cluster-info
-kubectl get pod,svc --all-namespaces
-` ` `
+      - run: |
+          kubectl version --client --short
+          kubectl config view
+          kubectl cluster-info
+          kubectl get pod,svc --all-namespaces
+```
 
-## Description of public IP addresses used in actions
-- This action requires CCE. Open APIs of HUAWEI CLOUD are invoked. You can view the involved public network domain names at [Regions and Endpoints] (https://developer.huaweicloud.com/endpoint?CCE).
-- This action needs to download kubectl and access the website in the domain name https://storage.googleapis.com.
+## Action中使用的公网地址说明
+- 本action需要使用CCE服务，使用过程会调用华为云的OpenAPI，涉及到的公网域名可到华为云[地区和终端节点](https://developer.huaweicloud.com/endpoint?CCE)查看  
+- 本action需要下载kubectl，需要访问 https://storage.googleapis.com 域名下的网址  
 
-## Public IP address introduced by the third-party open-source package
-- [https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary](https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary)
-- [https://iam.myhuaweicloud.com](https://iam.myhuaweicloud.com)
-- [https://github.com/jprichardson/node-fs-extra/issues/269](https://github.com/jprichardson/node-fs-extra/issues/269)
-- [https://github.com/jprichardson/node-fs-extra/pull/141](https://github.com/jprichardson/node-fs-extra/pull/141)
-- [https://lodash.com/](https://lodash.com/)
-- [https://openjsf.org/](https://openjsf.org/)
-- [https://lodash.com/license](https://lodash.com/license)
-- [http://underscorejs.org/LICENSE](http://underscorejs.org/LICENSE)
-- [https://npms.io/search?q=ponyfill](https://npms.io/search?q=ponyfill)
-- [http://momentjs.com/guides/#/warnings/js-date/](http://momentjs.com/guides/#/warnings/js-date/)
-- [http://momentjs.com/guides/#/warnings/min-max/](http://momentjs.com/guides/#/warnings/min-max/)
-- [http://momentjs.com/guides/#/warnings/add-inverted-param/](http://momentjs.com/guides/#/warnings/add-inverted-param/)
-- [http://momentjs.com/guides/#/warnings/zone/](http://momentjs.com/guides/#/warnings/zone/)
-- [http://momentjs.com/guides/#/warnings/dst-shifted/](http://momentjs.com/guides/#/warnings/dst-shifted/)
-- [https://repo.cloudartifact.lfg.dragon.tools.huawei.com/artifactory/api/npm/cbu-npm-public/axios/-/axios-0.21.4.tgz](https://repo.cloudartifact.lfg.dragon.tools.huawei.com/artifactory/api/npm/cbu-npm-public/axios/-/axios-0.21.4.tgz)
-- [https://github.com/axios/axios/issues](https://github.com/axios/axios/issues)
-
+## 第三方开源包引入的公网地址
+- https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary  
+- https://iam.myhuaweicloud.com
+- https://github.com/jprichardson/node-fs-extra/issues/269
+- https://github.com/jprichardson/node-fs-extra/pull/141
+- https://lodash.com/
+- https://openjsf.org/
+- https://lodash.com/license
+- http://underscorejs.org/LICENSE
+- https://npms.io/search?q=ponyfill
+- http://momentjs.com/guides/#/warnings/js-date/
+- http://momentjs.com/guides/#/warnings/min-max/
+- http://momentjs.com/guides/#/warnings/add-inverted-param/
+- http://momentjs.com/guides/#/warnings/zone/
+- http://momentjs.com/guides/#/warnings/dst-shifted/
+- https://repo.cloudartifact.lfg.dragon.tools.huawei.com/artifactory/api/npm/cbu-npm-public/axios/-/axios-0.21.4.tgz
+- https://github.com/axios/axios/issues
